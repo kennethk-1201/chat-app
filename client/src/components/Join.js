@@ -1,6 +1,8 @@
 const Join = props => {
     return(
-        'hi'
+        <h1>
+            Join
+        </h1>
     )
 }
 

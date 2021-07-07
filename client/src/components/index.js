@@ -1,5 +1,5 @@
-import Join from "Join";
-import Chat from "Chat";
+import Join from "./Join";
+import Chat from "./Chat";
 
 export {
     Join,

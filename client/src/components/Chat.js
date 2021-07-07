@@ -1,6 +1,8 @@
 const Chat = props => {
     return(
-        'hi'
+        <h1>
+            Chat
+        </h1>
     )
 }
 
