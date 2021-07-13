@@ -1,7 +1,7 @@
 // helper functions
 const users = [];
 
-const addUser = ({ id, name, room}) => {
+const addUser = ({ id, name, room }) => {
     // trim variables ( eg. Example Name => examplename )
     name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
@@ -13,7 +13,7 @@ const addUser = ({ id, name, room}) => {
         return { error: 'Username is taken'};
     }
 
-    const user = { id, name, room};
+    const user = { id, name, room };
     users.push(user);
 
     return { user }
@@ -32,4 +32,4 @@ const getUsersInRoom = room => {
     return users.filter( user => user.room === room)
 }
 
-module.exports = { addUser, removeUser, getUser, getUsersInRoom}
+module.exports = { addUser, removeUser, getUser, getUsersInRoom }
