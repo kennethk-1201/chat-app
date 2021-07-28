@@ -3,7 +3,7 @@ const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
 
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users')
+const { addUser, removeUser, getUser, getUsersInRoom, users } = require('./users')
 
 const router = require('./router');
 
@@ -29,11 +29,12 @@ io.on('connection', (socket) => {
     // new socket handling
     socket.on('join', ({ name, room }, callback) => {
         const { error, user } = addUser({ id: socket.id, name, room });
-        
-        console.log(`${user.name} joined ${user.room}`)
+        console.log(users)
 
         // error handler
         if(error) return callback(error);
+
+        console.log(`${user.name} joined ${user.room}`)
 
         // send message to the current socket
         socket.emit('message', { user: 'admin', text:`${user.name}, welcome to room ${user.room}`});
@@ -61,8 +62,17 @@ io.on('connection', (socket) => {
         callback();
     })
 
+    // broadcast user left
     socket.on('disconnect', () => {
-        console.log('User had left');
+        let user = getUser(socket.id);
+        console.log(users)
+        removeUser(socket.id);
+        try {
+            socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has left!`});
+            console.log(`${user.name} had left room ${user.room}`);
+        } catch {
+            console.log(`User has left the room`);
+        }
     })
 });
 

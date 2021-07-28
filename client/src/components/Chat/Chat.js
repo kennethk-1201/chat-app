@@ -13,6 +13,7 @@ const Chat = ({ location }) => {
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search)
+        console.log('url', location.search)
     
         // connect to API
         socket = io(endpoint);
@@ -62,7 +63,7 @@ const Chat = ({ location }) => {
                 <ul>
                     {messages.map((msg, index) => {
                         return <li key={index}>
-                            {msg.text} - {msg.user}
+                            {msg.user} : {msg.text}
                         </li>
                     })}
                 </ul>
