@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import "./style.css";
+
 import {
     Join,
     Chat
@@ -9,8 +11,10 @@ import {
 const App = props => {
     return (
         <Router>
-            <Route path="/" exact component={Join}/>
-            <Route path="/chat" exact component={Chat}/>
+            <div className="container">
+                <Route path="/" exact component={Join}/>
+                <Route path="/chat" exact component={Chat}/>
+            </div>
         </Router>
     )
 }

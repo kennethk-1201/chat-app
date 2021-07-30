@@ -1,0 +1,42 @@
+.join-inner-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid;
+    padding: 4rem 2rem;
+    .heading{
+        text-align: center;
+    }
+    .input-container{
+        display:flex;
+        align-items:center;
+    }
+    .icon{
+        padding:0.5rem;
+        font-size: 2rem;
+    }
+    .join-input{
+        border: 0px solid;
+        padding: 0.5rem 0.5rem;
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        background-color: #f2f2f2;
+        &:focus{
+            outline: none;
+        }
+    }
+    .button{
+        border: none;
+        background-color: #59b7ff;
+        color:white;
+        font-size: 1.5rem;
+        padding: 0.5rem 1.5rem;
+        border-radius: 1.5rem;
+        margin-top: 1rem;
+        &:hover{
+            transition: 0.3s;
+            background-color:#358fd4;
+        }
+    }
+}

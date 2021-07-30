@@ -9,7 +9,7 @@ const Chat = ({ location }) => {
     const [room, setRoom] = useState('');
     const [message, setMessage] = useState([]);
     const [messages, setMessages] = useState([]);
-    const endpoint = '192.168.10.124:5000';
+    const endpoint = process.env.REACT_APP_NUS_API;
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search)
@@ -52,22 +52,20 @@ const Chat = ({ location }) => {
     }
 
     return(
-        <div className="outer-container">
-            <div className="container">
-                <input
-                    className="message-input" 
-                    value={message} 
-                    onChange={e => setMessage(e.target.value)}
-                    onKeyPress={e => e.key === "Enter" ? sendMessage(e) : null}
-                />
-                <ul>
-                    {messages.map((msg, index) => {
-                        return <li key={index}>
-                            {msg.user} : {msg.text}
-                        </li>
-                    })}
-                </ul>
-            </div>
+        <div className="container">
+            <input
+                className="message-input" 
+                value={message} 
+                onChange={e => setMessage(e.target.value)}
+                onKeyPress={e => e.key === "Enter" ? sendMessage(e) : null}
+            />
+            <ul>
+                {messages.map((msg, index) => {
+                    return <li key={index}>
+                        {msg.user} : {msg.text}
+                    </li>
+                })}
+            </ul>
         </div>
     )
 }
