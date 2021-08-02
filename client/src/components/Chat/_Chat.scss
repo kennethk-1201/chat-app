@@ -1,0 +1,107 @@
+.chat-inner-container{
+    height: 100%;
+    width: 100%;
+    // overflow-y: hidden;
+    overflow-x: hidden;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    ::-webkit-scrollbar{
+        opacity: 0;
+        width: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-thumb{
+        opacity: 100%;
+        width: 0.5rem;
+        background-color: darkgrey;
+        border-radius: 0.25rem;
+    }
+
+    .chat-list{
+        flex: 2 1 auto;
+        list-style-type: none;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column-reverse;
+
+        .message-sent{
+            display: flex;
+            padding: 0 1.5rem;
+            justify-content: flex-end;
+        }
+        .message-received{
+            display: flex;
+            padding: 0 1.5rem;
+            justify-content: flex-start;
+        }
+        .message-user{
+            font-weight:700;
+        }
+        .emoji-container{
+            position:relative;
+            opacity: 100%;
+            width: 100%;
+            max-height: 50%;
+            // bottom: 0;
+            transition: max-height 0.7s, opacity 0.4s;
+            order: -1;
+        }
+        .emoji-container-close{
+            position:relative;
+            opacity: 0;
+            width: 100%;
+            max-height: 0;
+            // bottom: -100%;
+            transition: max-height 0.7s, opacity 0.4s;
+            order: -1;
+        }
+        .emoji-picker-react{
+            width: 100%;
+        }
+    }
+    .chat-heading{
+        position: sticky;
+        z-index: 100;
+        width: inherit;
+        display: flex;
+        font-weight: 700;
+        padding: 1rem 1rem;
+        font-size: 2rem;
+        background-color: #59b7ff;
+        color: white;
+        box-shadow: 0 12px 18px 0 white, 0 16px 30px 0 white;
+    }
+    .input-holder{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1.5rem;
+        margin: 1rem 0;
+        .message-input{
+            position: sticky;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: #f2f2f2;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            z-index: 10;
+            svg:hover{
+                cursor:pointer;
+            }
+            .message-field{
+                width: 100%;
+                background-color: #f2f2f2;
+                font-size: 1.5rem;
+                border: 0px solid;
+                padding: 0 0.5rem;
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+}

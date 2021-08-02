@@ -9,7 +9,7 @@ const Join = props => {
     const [room, setRoom] = useState('')
 
     return(
-        <div className="join-inner-container">
+        <form onSubmit={e => (!name|| !room) ? e.preventDefault(): null} className="join-inner-container">
             <h1 className="heading">Enter a room</h1>
             <div className="input-container">
                 <MeetingRoomIcon className="icon" fontSize="inherit"/>
@@ -19,10 +19,10 @@ const Join = props => {
                 <PersonIcon className="icon" fontSize="inherit"/>
                 <input placeholder="Name" className="join-input" type="text" onChange={e => setName(e.target.value)}/>                
             </div>
-            <Link onClick={e => (!name|| !room) ? e.preventDefault(): null} to={`/chat?name=${name}&room=${room}`}>
+            <Link to={`/chat?name=${name}&room=${room}`}>
                 <button className="button mt-20" type="submit">Join</button>
             </Link>
-        </div>
+        </form>
     )
 }
 

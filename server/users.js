@@ -3,8 +3,8 @@ const users = [];
 
 const addUser = ({ id, name, room }) => {
     // trim variables ( eg. Example Name => examplename )
-    name = name.trim().toLowerCase();
-    room = room.trim().toLowerCase();
+    name = name.trim()
+    room = room.trim()
 
     // check if username exists in the room
     const existingUser = users.find( user => user.room === room && user.name === name)

@@ -37,10 +37,10 @@ io.on('connection', (socket) => {
         console.log(`${user.name} joined ${user.room}`)
 
         // send message to the current socket
-        socket.emit('message', { user: 'admin', text:`${user.name}, welcome to room ${user.room}`});
+        socket.emit('message', { user: 'Admin', text:`${user.name}, welcome to room ${user.room}`});
         
         // broadcast message to all current sockets in the room
-        socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!`});
+        socket.broadcast.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has joined!`});
         
         // join current socket to the room
         socket.join(user.room);
@@ -51,6 +51,8 @@ io.on('connection', (socket) => {
 
     // message handling
     socket.on('sendMessage', (message, callback) => {
+
+        console.log(socket.id);
 
         // find user with id
         const user = getUser(socket.id);
@@ -68,9 +70,10 @@ io.on('connection', (socket) => {
         console.log(users)
         removeUser(socket.id);
         try {
-            socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has left!`});
+            socket.broadcast.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left!`});
             console.log(`${user.name} had left room ${user.room}`);
-        } catch {
+        } catch(e) {
+            console.log(e);
             console.log(`User has left the room`);
         }
     })
