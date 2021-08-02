@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import queryString from 'query-string';
@@ -23,6 +23,7 @@ const Chat = ({ location }) => {
     const [chosenEmoji, setChosenEmoji] = useState(null);
     const [displayEmoji, setDisplayEmoji] = useState(false);
 
+    const latestMessages = useRef(messages);
     const history = useHistory();
 
     AOS.init();
@@ -51,14 +52,17 @@ const Chat = ({ location }) => {
         }
     }, [endpoint, location.search]);
 
+    // fix stale state
+    useEffect(() => {
+        latestMessages.current=messages
+    }, [messages])
+
     // message listener
     useEffect(() => {
         socket.on('message', message => {
-            // append to messages array
-            console.log(messages);
-            console.log(_.isEqual(messages[0],message))
-            if(!_.isEqual(messages[0],message)){
-                setMessages([message, ...messages]);
+            if(!_.isEqual(latestMessages.current[0],message)){
+                console.log("different", !_.isEqual(messages[0],message), messages[0],messages, message, latestMessages.current)
+                setMessages([message, ...latestMessages.current]);
             }
             var chatbox = document.getElementById("chat-container");
             chatbox.scrollTop = chatbox.scrollHeight;
