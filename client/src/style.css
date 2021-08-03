@@ -39,6 +39,23 @@
           flex-direction: column-reverse;
 }
 
+.chat-inner-container .chat-list .chat-intro {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  opacity: 80%;
+  padding: 3rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid lightgray;
+}
+
 .chat-inner-container .chat-list .message-sent {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -257,6 +274,10 @@ img {
           align-items: center;
 }
 
+.d-none {
+  display: none;
+}
+
 .fade-in {
   animation: fadeIn 1s;
   -webkit-animation: fadeIn 1s;
@@ -266,19 +287,19 @@ img {
 }
 
 @-webkit-keyframes fadeIn {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
   }
 }
 
 @keyframes fadeIn {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
   }
 }

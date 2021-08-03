@@ -30,6 +30,10 @@ img {
   
 }
 
+.d-none{
+  display:none;
+}
+
 .fade-in {
   animation: fadeIn 1s;
   -webkit-animation: fadeIn 1s;
@@ -39,8 +43,8 @@ img {
 }
 
 @keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  from {opacity:0;}
+  to {opacity:1;}
 }
 
 @media (min-width: 768px) {

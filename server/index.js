@@ -24,8 +24,6 @@ const io = socketio(server, corsOptions);
 // listeners
 
 io.on('connection', (socket) => {
-    // console.log('We have a new connection');
-
     // new socket handling
     socket.on('join', ({ name, room }, callback) => {
         const { error, user } = addUser({ id: socket.id, name, room });
@@ -51,9 +49,6 @@ io.on('connection', (socket) => {
 
     // message handling
     socket.on('sendMessage', (message, callback) => {
-
-        console.log(socket.id);
-
         // find user with id
         const user = getUser(socket.id);
 

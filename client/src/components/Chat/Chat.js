@@ -5,6 +5,8 @@ import queryString from 'query-string';
 import io from 'socket.io-client';
 import _ from "lodash";
 
+import { Message } from "../Message/Message";
+
 import AOS from "aos";
 import Picker from 'emoji-picker-react';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
@@ -19,7 +21,6 @@ const Chat = ({ location }) => {
     const [room, setRoom] = useState('');
     const [message, setMessage] = useState([]);
     const [messages, setMessages] = useState([]);
-    const [repeated, setRepeated] = useState(false);
     const [chosenEmoji, setChosenEmoji] = useState(null);
     const [displayEmoji, setDisplayEmoji] = useState(false);
 
@@ -61,7 +62,6 @@ const Chat = ({ location }) => {
     useEffect(() => {
         socket.on('message', message => {
             if(!_.isEqual(latestMessages.current[0],message)){
-                console.log("different", !_.isEqual(messages[0],message), messages[0],messages, message, latestMessages.current)
                 setMessages([message, ...latestMessages.current]);
             }
             var chatbox = document.getElementById("chat-container");
@@ -91,22 +91,11 @@ const Chat = ({ location }) => {
             setDisplayEmoji(false);
 
             socket.emit('sendMessage', message, () => {
-                console.log("sent!")
             });
         }
     }
 
-    // map username to color
-    const colorMapper = (user) => {
-        switch (user){
-            case 'Admin':
-                return 'blue';
-            case name:
-                return 'red';
-            default:
-                return 'black';
-        }
-    }
+
 
     // emoji callback
     const onEmojiClick = (event, emojiObject) => {
@@ -118,16 +107,15 @@ const Chat = ({ location }) => {
             <div className="chat-heading" >{room}</div>
             <div className="chat-list">
                 {messages.map((msg, index) => {
-                    return <div className={name===msg.user ? "message-sent": "message-received"} key={index}>
-                        <div className={index === 0 ? "message fade-in" : "message"}>
-                            <p className="message-user" style={{color: colorMapper(msg.user)}}>{name===msg.user ? "You": msg.user }</p>
-                            <p className="message-text">{msg.text}</p>
-                        </div>
-                    </div>
+                    return <Message msg={msg} index={index} name={name}/>
                 })}
+                <div className="chat-intro">
+                    Messages will disappear when you close the window.
+                </div>
                 <div className={displayEmoji ? "emoji-container":"emoji-container-close"}>
                     <Picker onEmojiClick={onEmojiClick} />
                 </div>
+                
             </div>
             <div className="input-holder">
                 <div className="message-input">
