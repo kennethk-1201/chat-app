@@ -16,7 +16,7 @@ const server = http.createServer(app);
 
 const corsOptions={
     cors: true,
-    origins:["http://localhost:3000"],
+    origins:["http://localhost:3000", "https://chatapp-kiang.netlify.app"],
 }
 
 const io = socketio(server, corsOptions);
