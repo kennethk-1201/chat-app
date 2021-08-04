@@ -7,12 +7,9 @@ import _ from "lodash";
 
 import { Message } from "../Message/Message";
 
-import AOS from "aos";
 import Picker from 'emoji-picker-react';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import SendIcon from '@material-ui/icons/Send';
-
-import 'aos/dist/aos.css';
 
 let socket;
 
@@ -26,8 +23,6 @@ const Chat = ({ location }) => {
 
     const latestMessages = useRef(messages);
     const history = useHistory();
-
-    AOS.init();
     
     const endpoint = process.env.REACT_APP_NUS_API;
 
@@ -65,7 +60,7 @@ const Chat = ({ location }) => {
                 setMessages([message, ...latestMessages.current]);
             }
             var chatbox = document.getElementById("chat-container");
-            chatbox.scrollTop = chatbox.scrollHeight;
+            chatbox.scrollTop = 0;
         })
         socket.on('disconnect', () => {
             history.push('/')
@@ -112,10 +107,9 @@ const Chat = ({ location }) => {
                 <div className="chat-intro">
                     Messages will disappear when you close the window.
                 </div>
-                <div className={displayEmoji ? "emoji-container":"emoji-container-close"}>
-                    <Picker onEmojiClick={onEmojiClick} />
-                </div>
-                
+            </div>
+            <div className={displayEmoji ? "emoji-container":"emoji-container-close"}>
+                <Picker onEmojiClick={onEmojiClick} />
             </div>
             <div className="input-holder">
                 <div className="message-input">
